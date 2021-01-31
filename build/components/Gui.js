@@ -43,107 +43,14 @@ var Gui = function (_Component) {
         }
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Gui.__proto__ || Object.getPrototypeOf(Gui)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-            hide: _this.props.hide,
-            drag: false,
             pos: {
                 x: 0,
                 y: 0
             }
-        }, _this.handleHide = function () {
-            _this.setState({
-                hide: !_this.state.hide
-            });
         }, _this.handleData = function (path, val) {
             var data = _this.props.data;
             data[path] = val;
             _this.props.onUpdate(data);
-        }, _this.handleDown = function (e) {
-            e.preventDefault();
-            e.persist();
-            var pos = _this.state.pos;
-
-            _this.pos = pos;
-            _this.setState({ drag: true }, function () {
-                _this.start = {
-                    x: e.clientX,
-                    y: e.clientY
-                };
-                _this.handleMove();
-            });
-        }, _this.handleMove = function () {
-            window.addEventListener('mousemove', function (e) {
-                e.preventDefault();
-                if (_this.state.drag) {
-                    var xdiff = -(_this.start.x - e.clientX) + _this.pos.x;
-                    var ydiff = -(_this.start.y - e.clientY) + _this.pos.y;
-                    if (xdiff <= 0) {
-                        if (ydiff <= 0) {
-                            _this.setState({
-                                pos: {
-                                    x: 0,
-                                    y: 0
-                                }
-                            });
-                        } else {
-                            _this.setState({
-                                pos: {
-                                    x: 0,
-                                    y: ydiff
-                                }
-                            });
-                        }
-                    } else if (xdiff >= window.innerWidth - 300) {
-                        if (ydiff <= 0) {
-                            _this.setState({
-                                pos: {
-                                    x: window.innerWidth - 300,
-                                    y: 0
-                                }
-                            });
-                        } else {
-                            _this.setState({
-                                pos: {
-                                    x: window.innerWidth - 300,
-                                    y: ydiff
-                                }
-                            });
-                        }
-                    } else if (ydiff <= 0) {
-                        _this.setState({
-                            pos: {
-                                x: xdiff,
-                                y: 0
-                            }
-                        });
-                    } else if (ydiff <= 0 || xdiff <= 0) {
-                        _this.setState({
-                            pos: {
-                                x: 0,
-                                y: 0
-                            }
-                        });
-                    } else {
-                        _this.setState({
-                            pos: {
-                                x: xdiff,
-                                y: ydiff
-                            }
-                        });
-                    }
-                }
-            });
-
-            window.addEventListener('mouseup', function () {
-                _this.setState({
-                    drag: false
-                });
-            });
-
-            window.addEventListener('mouseleave', function () {
-                _this.setState({
-                    drag: false
-                });
-            });
         }, _this.renderChildren = function () {
             var _this$props = _this.props,
                 children = _this$props.children,
@@ -161,35 +68,111 @@ var Gui = function (_Component) {
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
+    //  handleDown = e => {
+    //      e.preventDefault();
+    //      e.persist();
+    //      let { pos } = this.state;
+    //      this.pos = pos;
+    //      this.setState({ drag: true }, () => {
+    //          this.start = {
+    //              x: e.clientX,
+    //              y: e.clientY
+    //          };
+    //          this.handleMove();
+    //      });
+    //  };
+
+    //  handleMove = () => {
+    //      window.addEventListener('mousemove', e => {
+    //          e.preventDefault();
+    //          if (this.state.drag) {
+    //              let xdiff = -(this.start.x - e.clientX) + this.pos.x;
+    //              let ydiff = -(this.start.y - e.clientY) + this.pos.y;
+    //              if (xdiff <= 0) {
+    //                  if (ydiff <= 0) {
+    //                      this.setState({
+    //                          pos: {
+    //                              x: 0,
+    //                              y: 0
+    //                          }
+    //                      });
+    //                  } else {
+    //                      this.setState({
+    //                          pos: {
+    //                              x: 0,
+    //                              y: ydiff
+    //                          }
+    //                      });
+    //                  }
+    //              } else if (xdiff >= window.innerWidth - 300) {
+    //                  if (ydiff <= 0) {
+    //                      this.setState({
+    //                          pos: {
+    //                              x: window.innerWidth - 300,
+    //                              y: 0
+    //                          }
+    //                      });
+    //                  } else {
+    //                      this.setState({
+    //                          pos: {
+    //                              x: window.innerWidth - 300,
+    //                              y: ydiff
+    //                          }
+    //                      });
+    //                  }
+    //              } else if (ydiff <= 0) {
+    //                  this.setState({
+    //                      pos: {
+    //                          x: xdiff,
+    //                          y: 0
+    //                      }
+    //                  });
+    //              } else if (ydiff <= 0 || xdiff <= 0) {
+    //                  this.setState({
+    //                      pos: {
+    //                          x: 0,
+    //                          y: 0
+    //                      }
+    //                  });
+    //              } else {
+    //                  this.setState({
+    //                      pos: {
+    //                          x: xdiff,
+    //                          y: ydiff
+    //                      }
+    //                  });
+    //              }
+    //          }
+    //      });
+
+    //      window.addEventListener('mouseup', () => {
+    //          this.setState({
+    //              drag: false
+    //          });
+    //      });
+
+    //      window.addEventListener('mouseleave', () => {
+    //          this.setState({
+    //              drag: false
+    //          });
+    //      });
+    //  };
+
     _createClass(Gui, [{
         key: 'render',
         value: function render() {
-            var style = {
-                transform: 'translate(' + this.state.pos.x + 'px, ' + this.state.pos.y + 'px)'
-            };
             return _react2.default.createElement(
                 'div',
                 {
                     id: 'controller-body',
-                    style: style,
                     className: 'jsx-' + _controllerStyles.controllerStyle.__scopedHash + ' ' + ((this.props.theme === 'dark' ? 'controller-body dark' : 'controller-body') || '')
                 },
-                _react2.default.createElement('div', { onMouseDown: this.handleDown, className: 'jsx-' + _controllerStyles.controllerStyle.__scopedHash + ' ' + 'drag'
-                }),
                 _react2.default.createElement(
                     'div',
                     {
                         className: 'jsx-' + _controllerStyles.controllerStyle.__scopedHash + ' ' + ((this.state.hide ? 'container hide' : 'container') || '')
                     },
                     this.renderChildren()
-                ),
-                _react2.default.createElement(
-                    'div',
-                    {
-                        onClick: this.handleHide,
-                        className: 'jsx-' + _controllerStyles.controllerStyle.__scopedHash + ' ' + ((this.props.theme === 'dark' ? 'control-button control-button-dark' : 'control-button') || '')
-                    },
-                    this.state.hide ? 'Open Controls' : 'Close Controls'
                 ),
                 _react2.default.createElement(_style2.default, {
                     styleId: _controllerStyles.controllerStyle.__scopedHash,

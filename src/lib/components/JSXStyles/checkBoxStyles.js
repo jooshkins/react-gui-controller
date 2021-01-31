@@ -22,7 +22,7 @@ const CheckBoxStyles = props => {
 						float: right;
 						width: 42px;
 						height: 22px;
-						padding: 4px;
+						padding: 7px;
 						border-radius: 20px;
 						background: ${props.theme === 'dark' ? '#212121' : '#fafafa'};
 						vertical-align: middle;

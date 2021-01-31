@@ -2,11 +2,9 @@ import css from 'styled-jsx/css';
 
 export const controllerStyle = css`
 	.controller-body {
-      position: fixed;
       margin:0;
       padding:0;
       box-sizing:border-box;
-		width: 300px;
 		height: auto;
 		background: rgb(250, 250, 250);
 		border: 1px solid rgb(214, 214, 214);

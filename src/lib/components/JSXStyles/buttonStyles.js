@@ -12,7 +12,6 @@ export const buttonStyle = css`
 		border-left: none;
 		border-image: initial;
 		font-size: 12px;
-		font-weight: 100;
 		cursor: pointer;
 		color: rgb(117, 153, 255);
 		outline: none;
