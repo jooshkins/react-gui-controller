@@ -25,14 +25,12 @@ export const colorStyle = css`
 	}
 
 	.color-block {
-		position: absolute;
 		float: right;
 		width: 100%;
 		height: 100%;
 	}
 
 	.color-strip {
-		position: absolute;
 		float: right;
 		width: 100%;
 		height: 100%;

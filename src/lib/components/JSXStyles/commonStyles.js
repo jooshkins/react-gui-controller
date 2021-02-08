@@ -23,7 +23,7 @@ export const label = css`
 	}
 
 	.label-dark {
-		color: rgb(119, 155, 255);
+		color: border: 1px solid #424242;;
 	}
 `;
 

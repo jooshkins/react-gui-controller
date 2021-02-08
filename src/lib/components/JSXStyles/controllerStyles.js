@@ -14,7 +14,7 @@ export const controllerStyle = css`
 	}
 
 	.dark {
-		background: #212121;
+		background: #1B1C1D;
 		border: 1px solid #313131;
 	}
 

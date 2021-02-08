@@ -3,108 +3,19 @@ import PropTypes from 'prop-types';
 import { controllerStyle } from './JSXStyles/controllerStyles';
 
 class Gui extends Component {
-    state = {
-        pos: {
-            x: 0,
-            y: 0
-        }
-    };
+   //  state = {
+   //      pos: {
+   //          x: 0,
+   //          y: 0
+   //      }
+   //  };
 
     handleData = (path, val) => {
         let data = this.props.data;
         data[path] = val;
         this.props.onUpdate(data);
+        this.props.onChange(path);
     };
-
-   //  handleDown = e => {
-   //      e.preventDefault();
-   //      e.persist();
-   //      let { pos } = this.state;
-   //      this.pos = pos;
-   //      this.setState({ drag: true }, () => {
-   //          this.start = {
-   //              x: e.clientX,
-   //              y: e.clientY
-   //          };
-   //          this.handleMove();
-   //      });
-   //  };
-
-   //  handleMove = () => {
-   //      window.addEventListener('mousemove', e => {
-   //          e.preventDefault();
-   //          if (this.state.drag) {
-   //              let xdiff = -(this.start.x - e.clientX) + this.pos.x;
-   //              let ydiff = -(this.start.y - e.clientY) + this.pos.y;
-   //              if (xdiff <= 0) {
-   //                  if (ydiff <= 0) {
-   //                      this.setState({
-   //                          pos: {
-   //                              x: 0,
-   //                              y: 0
-   //                          }
-   //                      });
-   //                  } else {
-   //                      this.setState({
-   //                          pos: {
-   //                              x: 0,
-   //                              y: ydiff
-   //                          }
-   //                      });
-   //                  }
-   //              } else if (xdiff >= window.innerWidth - 300) {
-   //                  if (ydiff <= 0) {
-   //                      this.setState({
-   //                          pos: {
-   //                              x: window.innerWidth - 300,
-   //                              y: 0
-   //                          }
-   //                      });
-   //                  } else {
-   //                      this.setState({
-   //                          pos: {
-   //                              x: window.innerWidth - 300,
-   //                              y: ydiff
-   //                          }
-   //                      });
-   //                  }
-   //              } else if (ydiff <= 0) {
-   //                  this.setState({
-   //                      pos: {
-   //                          x: xdiff,
-   //                          y: 0
-   //                      }
-   //                  });
-   //              } else if (ydiff <= 0 || xdiff <= 0) {
-   //                  this.setState({
-   //                      pos: {
-   //                          x: 0,
-   //                          y: 0
-   //                      }
-   //                  });
-   //              } else {
-   //                  this.setState({
-   //                      pos: {
-   //                          x: xdiff,
-   //                          y: ydiff
-   //                      }
-   //                  });
-   //              }
-   //          }
-   //      });
-
-   //      window.addEventListener('mouseup', () => {
-   //          this.setState({
-   //              drag: false
-   //          });
-   //      });
-
-   //      window.addEventListener('mouseleave', () => {
-   //          this.setState({
-   //              drag: false
-   //          });
-   //      });
-   //  };
 
     renderChildren = () => {
         const { children, data } = this.props;
@@ -129,7 +40,8 @@ class Gui extends Component {
                         : 'controller-body'
                 }
             >
-                <div className={this.state.hide ? 'container hide' : 'container'}>
+                {/* <div className={this.state.hide ? 'container hide' : 'container'}> */}
+                <div>
                     {this.renderChildren()}
                 </div>
                 <style jsx>{controllerStyle}</style>

@@ -42,15 +42,11 @@ var Gui = function (_Component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Gui.__proto__ || Object.getPrototypeOf(Gui)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-            pos: {
-                x: 0,
-                y: 0
-            }
-        }, _this.handleData = function (path, val) {
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Gui.__proto__ || Object.getPrototypeOf(Gui)).call.apply(_ref, [this].concat(args))), _this), _this.handleData = function (path, val) {
             var data = _this.props.data;
             data[path] = val;
             _this.props.onUpdate(data);
+            _this.props.onChange(path);
         }, _this.renderChildren = function () {
             var _this$props = _this.props,
                 children = _this$props.children,
@@ -67,95 +63,11 @@ var Gui = function (_Component) {
             });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
-
-    //  handleDown = e => {
-    //      e.preventDefault();
-    //      e.persist();
-    //      let { pos } = this.state;
-    //      this.pos = pos;
-    //      this.setState({ drag: true }, () => {
-    //          this.start = {
-    //              x: e.clientX,
-    //              y: e.clientY
-    //          };
-    //          this.handleMove();
-    //      });
-    //  };
-
-    //  handleMove = () => {
-    //      window.addEventListener('mousemove', e => {
-    //          e.preventDefault();
-    //          if (this.state.drag) {
-    //              let xdiff = -(this.start.x - e.clientX) + this.pos.x;
-    //              let ydiff = -(this.start.y - e.clientY) + this.pos.y;
-    //              if (xdiff <= 0) {
-    //                  if (ydiff <= 0) {
-    //                      this.setState({
-    //                          pos: {
-    //                              x: 0,
-    //                              y: 0
-    //                          }
-    //                      });
-    //                  } else {
-    //                      this.setState({
-    //                          pos: {
-    //                              x: 0,
-    //                              y: ydiff
-    //                          }
-    //                      });
-    //                  }
-    //              } else if (xdiff >= window.innerWidth - 300) {
-    //                  if (ydiff <= 0) {
-    //                      this.setState({
-    //                          pos: {
-    //                              x: window.innerWidth - 300,
-    //                              y: 0
-    //                          }
-    //                      });
-    //                  } else {
-    //                      this.setState({
-    //                          pos: {
-    //                              x: window.innerWidth - 300,
-    //                              y: ydiff
-    //                          }
-    //                      });
-    //                  }
-    //              } else if (ydiff <= 0) {
-    //                  this.setState({
-    //                      pos: {
-    //                          x: xdiff,
-    //                          y: 0
-    //                      }
-    //                  });
-    //              } else if (ydiff <= 0 || xdiff <= 0) {
-    //                  this.setState({
-    //                      pos: {
-    //                          x: 0,
-    //                          y: 0
-    //                      }
-    //                  });
-    //              } else {
-    //                  this.setState({
-    //                      pos: {
-    //                          x: xdiff,
-    //                          y: ydiff
-    //                      }
-    //                  });
-    //              }
-    //          }
-    //      });
-
-    //      window.addEventListener('mouseup', () => {
-    //          this.setState({
-    //              drag: false
-    //          });
-    //      });
-
-    //      window.addEventListener('mouseleave', () => {
-    //          this.setState({
-    //              drag: false
-    //          });
-    //      });
+    //  state = {
+    //      pos: {
+    //          x: 0,
+    //          y: 0
+    //      }
     //  };
 
     _createClass(Gui, [{
@@ -170,7 +82,7 @@ var Gui = function (_Component) {
                 _react2.default.createElement(
                     'div',
                     {
-                        className: 'jsx-' + _controllerStyles.controllerStyle.__scopedHash + ' ' + ((this.state.hide ? 'container hide' : 'container') || '')
+                        className: 'jsx-' + _controllerStyles.controllerStyle.__scopedHash
                     },
                     this.renderChildren()
                 ),
