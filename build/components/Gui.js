@@ -63,12 +63,6 @@ var Gui = function (_Component) {
             });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
-    //  state = {
-    //      pos: {
-    //          x: 0,
-    //          y: 0
-    //      }
-    //  };
 
     _createClass(Gui, [{
         key: 'render',

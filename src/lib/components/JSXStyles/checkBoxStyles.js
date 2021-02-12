@@ -4,7 +4,7 @@ const CheckBoxStyles = props => {
 	return (
 		<div>
 			<input
-				id={'switch' + props.num}
+				id={'switch' + props.num + props.path}
 				name="view"
 				type="checkbox"
 				hidden
@@ -12,12 +12,12 @@ const CheckBoxStyles = props => {
 				onChange={props.handleChange}
 			/>
 			<label
-				htmlFor={'switch' + props.num}
-				className={'switch' + props.num}
+				htmlFor={'switch' + props.num + props.path}
+				className={'switch' + props.num + props.path}
 			/>
 			<style jsx>
 				{`
-					.switch${props.num} {
+					.switch${props.num + props.path} {
 						display: inline-block;
 						float: right;
 						width: 42px;
@@ -36,7 +36,7 @@ const CheckBoxStyles = props => {
 							${props.theme === 'dark' ? '#585858' : '#e5e5e5'};
 					}
 
-					.switch${props.num}:before, .switch${props.num}:after {
+					.switch${props.num + props.path}:before, .switch${props.num + props.path}:after {
 						content: '';
 						display: block;
 						width: 13px;
@@ -48,39 +48,39 @@ const CheckBoxStyles = props => {
 							background 150ms ease;
 					}
 
-					.switch${props.num}:before {
+					.switch${props.num + props.path}:before {
 						background: rgba(128, 128, 128, 0.075);
 						transform: translate3d(0, -50%, 0) scale(0);
 					}
 
-					.switch${props.num}:after {
+					.switch${props.num + props.path}:after {
 						background: ${props.theme === 'dark' ? '#585858' : '#d8d8d8'};
 						border: 1px solid
 							${props.theme === 'dark' ? '#585858' : '#d6d6d6'};
 						transform: translate3d(-2px, -50%, 0);
 					}
 
-					.switch${props.num}:active:before {
+					.switch${props.num + props.path}:active:before {
 						transform: translate3d(0, -50%, 0) scale(3);
 					}
 
-					input:checked + .switch${props.num} {
+					input:checked + .switch${props.num + props.path} {
 						background: #769aff;
 					}
 
-					input:checked + .switch${props.num}:before {
+					input:checked + .switch${props.num + props.path}:before {
 						background: rgba(131, 177, 84, 0.075);
 						transform: translate3d(100%, -50%, 0) scale(1);
 					}
 
-					input:checked + .switch${props.num}:after {
+					input:checked + .switch${props.num + props.path}:after {
 						background: ${props.theme === 'dark' ? '#313131' : '#fff'};
 						border: 1px solid
 							${props.theme === 'dark' ? '#313131' : '#fff'};
 						transform: translate3d(124%, -50%, 0);
 					}
 
-					input:checked + .switch${props.num}:active:before {
+					input:checked + .switch${props.num + props.path}:active:before {
 						background: rgba(131, 177, 84, 0.075);
 						transform: translate3d(100%, -50%, 0) scale(3);
 					}

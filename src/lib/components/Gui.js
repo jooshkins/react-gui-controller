@@ -3,13 +3,6 @@ import PropTypes from 'prop-types';
 import { controllerStyle } from './JSXStyles/controllerStyles';
 
 class Gui extends Component {
-   //  state = {
-   //      pos: {
-   //          x: 0,
-   //          y: 0
-   //      }
-   //  };
-
     handleData = (path, val) => {
         let data = this.props.data;
         data[path] = val;
@@ -40,7 +33,6 @@ class Gui extends Component {
                         : 'controller-body'
                 }
             >
-                {/* <div className={this.state.hide ? 'container hide' : 'container'}> */}
                 <div>
                     {this.renderChildren()}
                 </div>

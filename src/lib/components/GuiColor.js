@@ -37,7 +37,11 @@ class GuiColor extends Component {
     componentDidMount() {
         //after the component has been mounted create canvas context and also apply setting's.
         let a, col, val;
-        if (this.props.type === 'hex') {
+        if (this.props.type === 'hexNum') { // added by Joshua Sheridan
+         val = "#" + Number(this.props.data[this.props.path]).toString(16)
+         col = HexToRgb(val);
+         a = RgbToHsl(col[0], col[1], col[2]);
+        } else if (this.props.type === 'hex') {
             val = this.props.data[this.props.path];
             col = HexToRgb(val);
             a = RgbToHsl(col[0], col[1], col[2]);
@@ -90,7 +94,10 @@ class GuiColor extends Component {
 
                 let hsv;
                 let color;
-                if (this.props.type === 'hex') {
+                if (this.props.type === 'hexNum') {
+                  hsv = RgbToHsv(col[0], col[1], col[2]);
+                  color = "#" + Number(this.props.data[this.props.path]).toString(16) // Joshua Sheridan Add
+                } else if (this.props.type === 'hex') {
                     hsv = RgbToHsv(col[0], col[1], col[2]);
                     color = this.props.data[this.props.path];
                 } else if (this.props.type === 'rgb') {
@@ -99,7 +106,7 @@ class GuiColor extends Component {
                 }
 
                 this.setState({
-                    color: color,
+                    color: color, // does this need to be converted?
                     pos: {
                         x: `${(this.height1 * (-(hsv[2] * 100) + 100)) / 100}`,
                         y: `${(this.width1 * (hsv[1] * 100)) / 100}`
@@ -146,7 +153,7 @@ class GuiColor extends Component {
             this.height1
         ).data;
 
-        if (this.props.type === 'hex') {
+        if (this.props.type === 'hex' || 'hexNum') { // Joshua Sheridan Add
             this.setState({
                 color: RgbToHex(imageData[0], imageData[1], imageData[2])
             });
@@ -224,7 +231,7 @@ class GuiColor extends Component {
             ',' +
             imageData[2] +
             ',1)';
-        if (this.props.type === 'hex') {
+        if (this.props.type === 'hex' || 'hexNum') { // Joshua Sheridan Add 
             this.setState({
                 color: RgbToHex(imageData[0], imageData[1], imageData[2]),
                 pos: {
@@ -337,7 +344,9 @@ class GuiColor extends Component {
         const { color, rgb } = this.state;
         e.preventDefault();
         this.changeColorBlock(e);
-        if (this.props.type === 'hex') {
+        if (this.props.type === 'hexNum') { // Joshua Sheridan add
+         this.props.updateData(path, parseInt(color.substring(1), 16));
+        } else if (this.props.type === 'hex') {
             this.props.updateData(path, color);
         } else if (this.props.type === 'rgb') {
             this.props.updateData(path, rgb);
@@ -349,8 +358,10 @@ class GuiColor extends Component {
         const { color, rgb } = this.state;
         e.preventDefault();
         this.changeColorStrip(e);
-        if (this.props.type === 'hex') {
-            this.props.updateData(path, color);
+        if (this.props.type === 'hexNum') { // Joshua Sheridan Add
+            this.props.updateData(path, parseInt(color.substring(1), 16));
+        } else if (this.props.type === 'hex') {
+            this.props.updateData(path, color); 
         } else if (this.props.type === 'rgb') {
             this.props.updateData(path, rgb);
         }
@@ -473,6 +484,7 @@ class GuiColor extends Component {
 GuiColor.propTypes = {
     theme: PropTypes.oneOf(['light', 'dark']),
     label: PropTypes.string,
+    disable: PropTypes.bool,
     num: PropTypes.number,
     updateData: PropTypes.func
 };

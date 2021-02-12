@@ -93,7 +93,8 @@ var GuiColor = function (_Component) {
 
             var imageData = _this.ctx1.getImageData(_this.state.pos.y, _this.state.pos.x, _this.width1, _this.height1).data;
 
-            if (_this.props.type === 'hex') {
+            if (_this.props.type === 'hex' || 'hexNum') {
+                // Joshua Sheridan Add
                 _this.setState({
                     color: (0, _Conversion.RgbToHex)(imageData[0], imageData[1], imageData[2])
                 });
@@ -146,7 +147,8 @@ var GuiColor = function (_Component) {
             var imageData = _this.ctx1.getImageData(x, y, _this.width1, _this.height1).data;
 
             _this.rgbaColor = 'rgba(' + imageData[0] + ',' + imageData[1] + ',' + imageData[2] + ',1)';
-            if (_this.props.type === 'hex') {
+            if (_this.props.type === 'hex' || 'hexNum') {
+                // Joshua Sheridan Add 
                 _this.setState({
                     color: (0, _Conversion.RgbToHex)(imageData[0], imageData[1], imageData[2]),
                     pos: {
@@ -239,7 +241,10 @@ var GuiColor = function (_Component) {
 
             e.preventDefault();
             _this.changeColorBlock(e);
-            if (_this.props.type === 'hex') {
+            if (_this.props.type === 'hexNum') {
+                // Joshua Sheridan add
+                _this.props.updateData(path, parseInt(color.substring(1), 16));
+            } else if (_this.props.type === 'hex') {
                 _this.props.updateData(path, color);
             } else if (_this.props.type === 'rgb') {
                 _this.props.updateData(path, rgb);
@@ -252,7 +257,10 @@ var GuiColor = function (_Component) {
 
             e.preventDefault();
             _this.changeColorStrip(e);
-            if (_this.props.type === 'hex') {
+            if (_this.props.type === 'hexNum') {
+                // Joshua Sheridan Add
+                _this.props.updateData(path, parseInt(color.substring(1), 16));
+            } else if (_this.props.type === 'hex') {
                 _this.props.updateData(path, color);
             } else if (_this.props.type === 'rgb') {
                 _this.props.updateData(path, rgb);
@@ -273,7 +281,12 @@ var GuiColor = function (_Component) {
             var a = void 0,
                 col = void 0,
                 val = void 0;
-            if (this.props.type === 'hex') {
+            if (this.props.type === 'hexNum') {
+                // added by Joshua Sheridan
+                val = "#" + Number(this.props.data[this.props.path]).toString(16);
+                col = (0, _Conversion.HexToRgb)(val);
+                a = (0, _Conversion.RgbToHsl)(col[0], col[1], col[2]);
+            } else if (this.props.type === 'hex') {
                 val = this.props.data[this.props.path];
                 col = (0, _Conversion.HexToRgb)(val);
                 a = (0, _Conversion.RgbToHsl)(col[0], col[1], col[2]);
@@ -312,7 +325,10 @@ var GuiColor = function (_Component) {
 
                 var hsv = void 0;
                 var color = void 0;
-                if (_this4.props.type === 'hex') {
+                if (_this4.props.type === 'hexNum') {
+                    hsv = (0, _Conversion.RgbToHsv)(col[0], col[1], col[2]);
+                    color = "#" + Number(_this4.props.data[_this4.props.path]).toString(16); // Joshua Sheridan Add
+                } else if (_this4.props.type === 'hex') {
                     hsv = (0, _Conversion.RgbToHsv)(col[0], col[1], col[2]);
                     color = _this4.props.data[_this4.props.path];
                 } else if (_this4.props.type === 'rgb') {
@@ -321,7 +337,7 @@ var GuiColor = function (_Component) {
                 }
 
                 _this4.setState({
-                    color: color,
+                    color: color, // does this need to be converted?
                     pos: {
                         x: '' + _this4.height1 * (-(hsv[2] * 100) + 100) / 100,
                         y: '' + _this4.width1 * (hsv[1] * 100) / 100
@@ -432,6 +448,7 @@ var GuiColor = function (_Component) {
 GuiColor.propTypes = {
     theme: _propTypes2.default.oneOf(['light', 'dark']),
     label: _propTypes2.default.string,
+    disable: _propTypes2.default.bool,
     num: _propTypes2.default.number,
     updateData: _propTypes2.default.func
 };
